@@ -31,6 +31,7 @@ import { User, Lock } from '@element-plus/icons-vue';
 import { ref, reactive } from 'vue';
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { getTime } from '@/utils/common'
 // import { ElMessage } from 'element-plus'
 
 const store = useStore()
@@ -50,14 +51,29 @@ const validatePass = (rule: any, value: any, callback: any) => {
     if (!value) {
         return callback(new Error('密码不能为空！'))
     } else {
-        callback()
+        if(value.length>=6 && value.length<=15){
+             callback()
+        } else{
+            return callback(new Error('密码长度不对！！'))
+        }
     }
-
 }
+// @ts-ignore：
+const validateUser = (rule: any, value: any, callback: any) => {
+    if (/^\w{5,10}$/.test(value)) {
+        callback()
+    } else {
+        console.log(/^\d{5,10}$/.test(value))
+        console.log(value)
+        return callback(new Error('账号长度最少为5位！'))
+    }
+}
+
+
 //校验规则
 const rules = {
     username: [
-        { required: true, message: '请输入用户名！', trigger: 'blur' }
+        { validator: validateUser, trigger: 'blur' }
     ],
     password: [
         { validator: validatePass, trigger: 'blur' }
@@ -67,23 +83,28 @@ const rules = {
 //校验按钮
 const ruleFormRef = ref()
 const submit = () => {
-    loading.value = true
     ruleFormRef.value.validate((val: any) => {
         if (val) {
+            loading.value = true
             store.dispatch("user/userLogin", loginForm).then((res) => {
                 console.log(res)
                 loading.value = false
-// @ts-ignore
-                ElMessage.success('chenggong!')
+                // @ts-ignore
+                ElNotification({
+                    type: 'success',
+                    message: `${getTime()}`,
+                    title: '欢迎回来'
+
+                })
                 router.push('/')
-                
+
             }).catch((err) => {
                 loading.value = false
                 router.push('/404')
-// @ts-ignore
+                // @ts-ignore
                 ElNotification({
-                    type:'error',
-                    message:err.message
+                    type: 'error',
+                    message: err.message
 
                 })
             })
