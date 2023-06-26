@@ -9,9 +9,14 @@ declare module 'vue' {
   export interface GlobalComponents {
     Datai: typeof import('./src/components/datai/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElPagination: typeof import('element-plus/es')['ElPagination']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    ElCol: typeof import('element-plus/es')['ElCol']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElItem: typeof import('element-plus/es')['ElItem']
+    ElRow: typeof import('element-plus/es')['ElRow']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
   }
 }
