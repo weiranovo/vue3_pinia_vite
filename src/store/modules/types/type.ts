@@ -1,4 +1,5 @@
+import { RouteRecordRaw } from 'vue-router'
 export interface UserState {
     token:string | null,
-    [propname:string]:any
+    menuRoutes:RouteRecordRaw[]
 }

@@ -1,10 +1,11 @@
 import { reqLogin } from "@/api/user"
 import type { loginForm, loginResponseData } from "@/api/user/type"
 import type { UserState } from "./types/type"
+import {constantRoute} from '@/router/routes'
 const state = ():UserState => {
     return {
-        name: "haha",
-        token: ''
+        token: '',
+        menuRoutes:constantRoute
     }
 }
 
