@@ -1,18 +1,28 @@
 //登陆接口需要携带的参数ts类型
-export interface loginForm{
+export interface loginFormData{
     username:string,
     password:string | number
 }
 
-interface dataType{
-    token?:string,
-    message?:string
+
+
+//定义全部接口返回的类型
+export interface responseData<T> {
+    code:number,
+    message:string,
+    ok:boolean,
+    data:T
 }
 
-//登陆接口返回数据类型
-export interface loginResponseData{
-    code:number
-    data:dataType
+//定义登陆返回的数据类型
+export interface userInforesponseData {
+    data:{
+        routes:string[],
+        buttons:string[],
+        roles:string[],
+        name:string,
+        avatar:string
+    }
 }
 
 interface user{
