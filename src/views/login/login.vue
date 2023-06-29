@@ -30,12 +30,13 @@
 import { User, Lock } from '@element-plus/icons-vue';
 import { ref, reactive } from 'vue';
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 import { getTime } from '@/utils/common'
 // import { ElMessage } from 'element-plus'
 
 const store = useStore()
 const router = useRouter()
+const route = useRoute()
 console.log(store.state.user.token)
 
 const loading = ref(false)
@@ -43,7 +44,7 @@ const loading = ref(false)
 //表单数据
 let loginForm = reactive({
     username: 'admin',
-    password: '111111'
+    password: 'atguigu123'
 })
 //校验密码
 // @ts-ignore：
@@ -94,18 +95,16 @@ const submit = () => {
                     type: 'success',
                     message: `${getTime()}`,
                     title: '欢迎回来'
-
                 })
-                router.push('/')
-
+                const redirect:any = route.query.redirect
+                    router.push({path:redirect || '/'})
+                    store.dispatch('user/userInfo')
             }).catch((err) => {
                 loading.value = false
-                router.push('/404')
                 // @ts-ignore
                 ElNotification({
                     type: 'error',
                     message: err.message
-
                 })
             })
         }

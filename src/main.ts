@@ -11,6 +11,8 @@ import router from '@/router'
 
 import store from './store'
 
+import '@/router/permission'
+
 
 const app = createApp(App)
 app.use(ElementPlus, { locale: zhCn, })

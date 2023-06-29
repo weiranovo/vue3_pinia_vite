@@ -1,10 +1,11 @@
 <template>
     <div class="logo">
         <img :src="setting.logo" alt="">
-        <p>{{ setting.title }}</p>
+        <p v-show="!flag" style="white-space: nowrap;" >{{ setting.title }}</p>
     </div>
     <el-scrollbar class="elscroll">
-        <el-menu background-color="#001592" text-color="#fff" :router="true">
+        <el-menu background-color="#001529" text-color="#fff" :default-active="route.fullPath" :router="true"
+            :collapse="flag" :collapse-transition="false">
             <asideMenu :menuList="store.state.user.menuRoutes"></asideMenu>
         </el-menu>
     </el-scrollbar>
@@ -14,7 +15,12 @@
 import setting from '@/setting'
 import asideMenu from './asideMenu.vue'
 import { useStore } from 'vuex';
+import { useRoute } from 'vue-router'
+defineProps(['flag'])
 let store = useStore()
+let route = useRoute()
+
+
 </script>
 
 <style scoped lang="scss">
@@ -30,6 +36,7 @@ let store = useStore()
         width: 40px;
         height: 40px;
         margin: 0 10px;
+
     }
 
     p {
@@ -40,8 +47,14 @@ let store = useStore()
 
 .elscroll {
     height: calc(100vh - $base-menu-logo-height);
-    .el-menu{
+
+    .el-menu {
         border-right: none;
     }
 }
+
+// .el-menu-vertical-demo:not(.el-menu--collapse) {
+//   width: 260px;
+//   height: 100%;
+// }
 </style>

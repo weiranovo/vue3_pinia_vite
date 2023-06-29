@@ -1,13 +1,22 @@
 <template>
     <router-view v-slot="{ Component }">
         <transition name="fade">
-            <component :is="Component" />
+            <component :is="Component" v-if="flag"/>
         </transition>
     </router-view>
 </template>
 
 <script setup lang="ts">
-
+import { ref,watch,nextTick } from "vue";
+import { useStore } from "vuex";
+const store = useStore()
+const flag = ref(true)
+watch(()=>store.state.layout.refresh,()=>{
+    flag.value = false
+    nextTick(()=>{
+        flag.value = true
+    })
+})
 </script>
 
 <style scoped lang="scss">
