@@ -14,15 +14,13 @@ request.interceptors.request.use((config) => {
 
 // const redirectPath = router.currentRoute.value.fullPath
 // const fullPath = encodeURIComponent(router.currentRoute.value.fullPath)
-console.log(router.currentRoute)
-console.log(router.currentRoute.value)
-console.log(window.location.href)
 const redirectPath = window.location.href.split('#')[1]
 request.interceptors.response.use((response) => {
     return response.data
 }, (err) => {
     let message = ''
-    let status = err.response.status
+    console.log(err)
+    let status = err.response?err.response.status:''
     switch (status) {
         case 401:
             message = "TOKEN过期"
@@ -44,9 +42,8 @@ request.interceptors.response.use((response) => {
 
     ElMessage({
         type:'error',
-        message
+        message:err.message
     })
-
     return Promise.reject(err)
 })
 
