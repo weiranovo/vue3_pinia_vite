@@ -13,6 +13,7 @@ import store from './store'
 
 import '@/router/permission'
 
+import directives from '@/utils/directives'
 
 const app = createApp(App)
 app.use(ElementPlus, { locale: zhCn, })
@@ -21,5 +22,7 @@ app.use(ElementPlus, { locale: zhCn, })
 app.use(golbalComponents)
 app.use(store)
 app.use(router)
+app.use(directives)
 app.mount('#app')
 // console.log(import.meta.env)
+

@@ -49,7 +49,6 @@ let flag = ref(false)
         }
     }
     .layout_main{
-        background-color: yellow;
         width: calc(100% - $base-menu-width);
         height: calc(100vh - $base-tabbar-height);
         position: absolute;

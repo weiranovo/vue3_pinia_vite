@@ -2,10 +2,8 @@
     <div class="login_container">
         <el-row>
             <el-col :span="12" :xs="0">
-
             </el-col>
             <el-col :span="12" :xs="24">
-
                 <el-form class="login_form" ref="ruleFormRef" :model="loginForm" :rules="rules">
                     <h1>hello</h1>
                     <h2>欢迎来到后台管理界面！</h2>
